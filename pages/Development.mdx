@@ -1,0 +1,428 @@
+# **DEVELOPMENT**
+
+After all the weeks of planning, we jumped on to the development phase of the website. We discussed various technology stack for developing this website like various frontend frameworks, ReactJs, VueJS, Wordpress, Gatsby etc, and for backend like MongoDb, SQL, Oracle. We had to be really careful during choosing the final stack on which the website would be build, BG Unified Solutions has variety of services and we are gonna give options to people to add anything to cart and buy online, so for this purpose we would be needing an Object Oriented Database so that things can work dynamically.
+
+The stage 1 of the website was going to be a content management system, where people can know the services company can offer, so we have to give a smooth exploring user experience to our customer/users so that they can take a quick tour whatever they want to know. To pursue this, we came up with the idea of a Single Page application using NextJs.
+
+### **1. Frontend Development**
+
+We used Next.js as our development framework. Next.js is an open-source React front-end development web framework that enables functionality such as server-side rendering and generating static websites for React-based web applications. It is a production-ready framework. Traditional React apps render all their content in the client-side browser; Next.js is used to extend this functionality to include applications rendered on the server-side.
+
+Next.js documentation : https://nextjs.org/docs
+
+The front-end code is located in the front-end directory; all the locations mentioned in this section are concerning this directory.
+
+## **Design System**
+
+Chakra UI is the UI library we used along with SASS (SCSS). Chakra UI provides accessible, reusable, and composable React components to create websites and apps.
+
+Sass is a stylesheet language that’s compiled to CSS. It allows you to use variables, nested rules, mixins, functions, and more, all with a fully CSS-compatible syntax. Sass helps keep large stylesheets well-organized and makes it easy to share design within and across projects. SCSS is one of the syntaxes of SASS. The SCSS syntax uses the file extension .scss. With a few small exceptions, it’s a superset of CSS, which means all valid CSS essentially is valid SCSS as well.
+
+Chakra UI documentation : https://chakra-ui.com/getting-started
+
+SASS documentation : [https://sass-lang.com/documentation](https://sass-lang.com/documentation%5C)
+
+Next.js uses the ‘App’ component located at pages/\_app.js to initialize pages. We connected the Next.js’ App’ component with SCSS and chakra-UI’s theme object so the pages can have an app-wide Chakra UI theme and SCSS support. The theme object of Chakra UI is where you define your application’s color palette, type scale, font stacks, breakpoints, border-radius values, and more. This theme object is located at public/assets/js/theme.js. The SCSS files are located in the public/assets/scss directory.
+
+## **Static Pages**
+
+In Next.js, a page is a React Component exported from a .js, .jsx, .ts, or .tsx file in the pages directory. Each page is associated with a route based on its file name.
+
+**Example:** If you create pages/about.js that exports a React component like below, it will be accessible at /about.
+
+We made several React components for various elements of a page such as cards, headers, footers, countup, etc. These components are located in the src/components directory. We utilized these components to build static pages, all located in the src/pages directory.
+
+List of all static pages :
+
+- Home page, located at src/pages/index.js , accessible at /.
+- About us page, located at src/pages/about.js , accessible at /about
+- Contact us page, located at src/pages/contact.js , accessible at /contact
+- Our Features page, located at src/pages/features.js , accessible at /features
+- Partners page, located at src/pages/partners.js , accessible at /partners
+- Privacy Policy page, located at src/pages/policies.js , accessible at /policies
+- Search page, located at src/pages/search.js , accessible at /search
+- Customer stories page, located at src/pages/stories.js , accessible at /stories
+- Trainings page, located at src/pages/trainings.js , accessible at /trainings
+- Development team page, located at src/pages/webteam.js , accessible at /webteam
+
+Each page contains a `<Head>` component imported from next/head which is used to include title, meta or any other head elements (e.g. viewport). These need to be contained as direct children of the Head element, or wrapped into maximum one level of `<React.Fragment> `or arrays—otherwise the tags won’t be correctly picked up on client-side navigations.
+
+## **Database**
+
+This directory is located at src/database and contains the content of the whole website including image urls, search tags, meta tags, etc. These are all stored as an array of objects. This directory contains the following files :
+
+1. **newsroom.jsx : Contains data of all the blog pages in an array of objects format. Each object contains the following keys :**
+   1. Index : Unique index number of the blog post
+   2. Title: Title of the blog post
+   3. Headertitle: Title to be used in what’s new section of the header
+   4. Headericon: Thumbnail image to be used in what’s new section of header
+   5. Description: Meta description for the blog post page
+   6. Date: Upload date of the blog post
+   7. By: Author of the blog post
+   8. Avatar: Author thumbnail image
+   9. Image: Background image location to be used
+   10. Imgalt: Alt tag content for background image
+   11. Category: Category of the blog post, can be ‘Updates’ or ‘Case Study’
+   12. Tags: Search tags array for the blog post
+   13. Link: Url to be used for blog post
+   14. Content: Actual content location of the blog post
+   15. Logo: Logo of a brand related to the blog post, if any.
+2. **partners.jsx: Contains information about all the partners in Our Partners page in an array of objects format. Each object contains the following keys :**
+   1. Name: Name of the Partner
+   2. Logo: Logo of the partner brand
+   3. Description : Description about the partner.
+3. **services.jsx: Contains data of and about all the services pages in an array of objects format. Each object contains the following keys :**
+   1. Title: Name of the service.
+   2. Slogan: Title slogan to be used under the name of the service.
+   3. bgImage: Background image location to be used
+   4. Category: Category of the service in the header
+   5. Icon: Icon image location to be used header
+   6. Color: Color of the icon to be used.
+   7. Tags: Search tags array for the service page.
+   8. Description: Meta description for the service page.
+   9. relatedServices: Name of the related services to be displayed at the end of a service page in an array format.
+   10. Conclusion: Conclusion line at the end of a service page.
+   11. Sections: Location of actual sections of content of a service page.
+4. **team.jsx: Contains Information about each member to be displayed in the Development team page in an array of objects format. Each object contains the following keys :**
+   1. Name: Name of the member.
+   2. Designation: Designation of the member
+5. **testimonials.jsx: Contains the content of each testimonial of the Customer Stories page in an array of objects format. Each object contains the following keys :**
+   1. id: Unique index number of each testimonial,
+   2. imageUrl: Location of company logo image,
+   3. imageAlt: Content of alt tag of each logo image,
+   4. author: Author name of each testimonial,
+   5. paragraph: Paragraph content of each testimonial
+   6. CompanyName: Name of company
+   7. designation: Designation of author
+6. **timeline.jsx: Contains data of Timeline in the about us page. Each object of array contains the following keys:**
+   1. Year: Year of card
+   2. Text: Paragraph content in the year card.
+   3. Rotate: Transform rotation value of the card.
+   4. Color: Color of the year title.
+7. **trainings.jsx: Contains data of the Training and Certification page cards in an array of object format. Each object contains the following keys:**
+   1. Title: Title of the certification programme
+   2. Image: Name of the image file of the company in brands folder
+   3. Content: Information about the certification programme.
+
+## **Basic Components of Content Management System**
+
+A web site's "content" is a combination of different components: text, graphics, images, scripts, included files such as Flash animations, audio/video streams or downloadable files. All of these may be components of one page, included in an HTML page using links or sometimes integrated in the HTML page itself. But even the text shown in the HTML page itself is regarded as "content". Content management systems organize and classify these components by dividing the content from the layout. In more concrete terms, the content is stored in content files, the layout is stored in layout files (i.e. document templates). Using this approach, a CMS provides the means for treating content and layout in separate ways. This also allows using the same content in different documents and formatted for different media ("cross-media publishing"). The CMS also automates menial tasks, such as applying the same page layout and appearance across the site. Menus and other navigation are also automatically produced. Along with the many other administrative tools, this leaves you to concentrate on the words, and not on the technology.
+
+The CMS would offer one place to make updates, or upload new files, which would
+populate automatically across all the pages using that information, eliminating the
+need to make multiple changes. The system would also automatically move studies
+between front page, recent studies, latest studies and archives sections which would
+eliminate the need for that manual process.
+
+### **Section Object**
+
+The section object schema defines the basic properties of the `<div>` like vertical margin, vertical padding, background color etc… which are listed below.
+
+| Property     | Type                | Description                                                                                                                                                               |
+| ------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| my           | unit                | Vertical Margin                                                                                                                                                           |
+| py           | unit                | Vertical Padding                                                                                                                                                          |
+| bg           | color               | Background Color of Section                                                                                                                                               |
+| bgImage      | string              | Background Image of the section                                                                                                                                           |
+| color        | color               | Text Color                                                                                                                                                                |
+| heading      | Component           | Title Text                                                                                                                                                                |
+| description  | text                | Description of the section                                                                                                                                                |
+| sectionAlign | left, center, right | If the section width is less than 12 then this property will align the section horizontally wherever you want.                                                            |
+| body         | Object array        | It is the type of component that is gonna display in the body of the section. We have designed various components for a start. You can see them in the component section. |
+| ending       | Component           |                                                                                                                                                                           |
+| slider       | Boolean             | Choose whether to convert this section into a slider. then the body object array will be shown as a carousel.                                                             |
+
+**Example:**
+
+Adding a new section in the page
+
+```nextjs {3} copy
+<Section my={4} py={8} bg=”light” color=”dark”>
+
+<Title>Title of the section</Title>
+
+<Description>Lorem Ipsum</Description>
+
+<Row columns={3}>
+
+<Body width={10} type=”number” data={
+
+{count: 10000,  title: “Core CPUs”, letterAfter:”+”,  titleColor: “primary”}
+
+]} />
+
+<Body width={10} type=”number” data={
+
+{count: 10000,  title: “Core CPUs”, letterAfter:”+”,  titleColor: “primary”}
+
+]} />
+
+<Body width={10} type=”number” data={
+
+{count: 10000,  title: “Core CPUs”, letterAfter:”+”,  titleColor: “primary”}
+
+]} />
+</Row>
+
+</Section>
+```
+
+### a. Number Count
+
+### Component to display any statistics present on the page.
+
+Name: **number**
+
+### Schema
+
+```js
+data = {
+  count: Number,
+
+  title: String,
+
+  description: String,
+
+  titleColor: Color,
+
+  descriptionColor: Color,
+
+  letterBefore: String,
+
+  letterAfter: String,
+};
+```
+
+---
+
+### b. Images Component to display images section present on the page.
+
+Name: **image**
+
+### Schema
+
+```js
+{
+
+images: Array,
+
+height: Unit,
+
+width: Unit
+
+spacing: Unit,
+
+blend: String,
+
+fallbackSrc: String Url,
+
+rounded: Unit
+
+}
+```
+
+### c. Feature Cards
+
+### Component to display featured cards present on the page.
+
+Name: **feature**
+
+### Schema
+
+```js
+{
+
+title: String,
+
+description: String,
+
+alignment: String,
+
+image: String (URL),
+
+icon: String (URL)
+
+}
+```
+
+---
+
+### d. Accordion with Image
+
+### Component to display features in accordion flow on the website.
+
+Name: **accordionWithImage**
+
+### Schema
+
+```js
+[
+  {
+    title: String,
+
+    description: String,
+
+    image: String(URL),
+  },
+];
+```
+
+### **Steps to add a new Service page:**
+
+1. Create a new file with the name of the service under the heading solutions.
+2. Import that file in “index.jsx”, under the solutions folder.
+3. Create a new section, with the service name, in “services.jsx”, under the database folder, with the following keys.
+
+services.jsx: Contains data of and about all the services pages in an array of objects format. Each object contains the following keys :
+
+    -   Title: Name of the service.
+    -  Slogan: Title slogan to be used under the name of the service.
+    -   bgImage: Background image location to be used
+    -  Category: Category of the service in the header
+    -  Icon: Icon image location to be used header
+    -   Color: Color of the icon to be used.
+    -   Tags: Search tags array for the service page.
+    -   Description: Meta description for the service page.
+    -   relatedServices: Name of the related services to be displayed at the end of a -service page in an array format.
+    -  Conclusion: Conclusion line at the end of a service page.
+    -  Sections: Location of actual sections of content of a service page.
+
+4. Edit the sections of the page, to customize according to your requirements.
+
+
+### **Steps to add a new Newsroom page:**
+
+1. Create a new file with the name of the article under the heading newsroom.
+2. Import that file in “index.jsx”, under the newsroom folder.
+3. Create a new section, with the article name, in “newsroom.jsx”, under the database folder, with the following keys.
+
+newsroom.jsx : Contains data of all the blog pages in an array of objects format. Each object contains the following keys :
+
+   * 1. Index : Unique index number of the blog post
+   * 2. Title: Title of the blog post
+   * 3. Headertitle: Title to be used in what’s new section of the header
+   * 4. Headericon: Thumbnail image to be used in what’s new section of header
+   * 5. Description: Meta description for the blog post page
+   * 6. Date: Upload date of the blog post
+   * 7. By: Author of the blog post
+   * 8. Avatar: Author thumbnail image
+   * 9. Image: Background image location to be used
+   * 10. Imgalt: Alt tag content for background image
+   * 11. Category: Category of the blog post, can be ‘Updates’ or ‘Case Study’
+   * 12. Tags: Search tags array for the blog post
+   * 13. Link: Url to be used for blog post
+   * 14. Content: Actual content location of the blog post
+   * 15. Logo: Logo of a brand related to the blog post, if any.
+1. Edit the sections of the page, to customize according to your requirements.
+
+### **2. Backend Development**
+
+### Backend development languages handle the ‘behind-the-scenes’ functionality of web applications. It’s code that connects the web to a database, manages user connections, and powers the web application itself. Backend development works in tandem with the front end to deliver the final product to the end user.
+
+## **Environment**
+
+We are using javascript as a backend language in our web app. For running this language ,we are using Node.js environment.
+
+For handling DBMS in our app , we are using the Nosql database (MongoDB).
+
+Framework: In node.js environment we are using Express.js Framework  for handling the whole backend.
+
+Express is the most popular Node web framework, and is the underlying library for a number of other popular Node web frameworks. It provides mechanisms to:
+
+- Write handlers for requests with different HTTP verbs at different URL paths (routes).
+- Integrate with "view" rendering engines in order to generate responses by inserting data into templates.
+- Set common web application settings like the port to use for connecting, and the location of templates that are used for rendering the response.
+- Add additional request processing "middleware" at any point within the request handling pipeline.
+
+**Reference:** https://expressjs.com/en/starter/installing.html
+
+
+## **Libraries & Modules**
+
+There are many third party libraries and modules which we are using into our web APP,are following as:
+
+**bcryptjs**: https://www.npmjs.com/package/bcryptjs
+
+**Body-parser**: https://www.npmjs.com/package/body-parser
+
+**cookie-parser**:https://www.npmjs.com/package/cookie-parser
+
+**cors**:  https://www.npmjs.com/package/cors
+
+**fs** : https://www.npmjs.com/package/fs
+
+**express-validator** : https://www.npmjs.com/package/express-validator
+
+**jsonwebtoken** : https://www.npmjs.com/package/jsonwebtoken
+
+**mongoose**:  https://www.npmjs.com/package/mongoose
+
+**morgan** : https://www.npmjs.com/package/morgan
+
+**nodemailer** : https://www.npmjs.com/package/nodemailer
+
+**qrcode** : https://www.npmjs.com/package/qrcode
+
+**redis** : https://www.npmjs.com/package/redis
+
+**speakeasy**: https://www.npmjs.com/package/speakeasy
+
+**uuid** : https://www.npmjs.com/package/uuid
+
+**dotenv**: https://www.npmjs.com/package/uuid
+
+## **CORS**
+
+**Cross-Origin Resource Sharing** ([CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS)) is an [HTTP](https://developer.mozilla.org/en-US/docs/Glossary/HTTP)-header based mechanism that allows a server to indicate any other [origin](https://developer.mozilla.org/en-US/docs/Glossary/origin)s (domain, protocol, or port) than its own from which a browser should permit loading of resources. CORS also relies on a mechanism by which browsers make a “preflight” request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
+
+An example of a cross-origin request: the front-end JavaScript code served from https://domain-a.com uses [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) to make a request for https://domain-b.com/data.json.
+
+For security reasons, browsers restrict cross-origin HTTP requests initiated from scripts. For example, XMLHttpRequest and the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) follow the [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy). This means that a web application using those APIs can only request resources from the same origin the application was loaded from unless the response from other origins includes the right CORS headers.
+
+## **HOW TO ENABLE CORS**
+
+For enabling the cors for any backend, we used the npm module “cors” . We can configure the cors according to our requirements, for that we can pass option to cors as shown following:
+
+## **Configuration Options for cors**
+
+- some legacy browsers (IE11, various SmartTVs) choke on 204.origin: Configures the **Access-Control-Allow-Origin** CORS header. Possible values:
+    - Boolean - set origin to true to reflect the [request origin](http://tools.ietf.org/html/draft-abarth-origin-09), as defined by req.header('Origin'), or set it to false to disable CORS.
+    - String - set origin to a specific origin. For example if you set it to "http://example.com" only requests from “http://example.com” will be allowed.
+    - RegExp - set origin to a regular expression pattern which will be used to test the request origin. If it’s a match, the request origin will be reflected. For example the pattern /example\.com$/ will reflect any request that is coming from an origin ending with “example.com”.
+    - Array - set origin to an array of valid origins. Each origin can be a String or a RegExp. For example ["http://example1.com", /\.example2\.com$/] will accept any request from “http://example1.com” or from a subdomain of “example2.com”.
+    - Function - set origin to a function implementing some custom logic. The function takes the request origin as the first parameter and a callback (called as callback(err, origin), where origin is a non-function value of the origin option) as the second.
+- methods: Configures the **Access-Control-Allow-Methods** CORS header. Expects a comma-delimited string (ex: ‘GET,PUT,POST’) or an array (ex: ['GET', 'PUT', 'POST']).
+- allowedHeaders: Configures the **Access-Control-Allow-Headers** CORS header. Expects a comma-delimited string (ex: ‘Content-Type,Authorization’) or an array (ex: ['Content-Type', 'Authorization']). If not specified, it defaults to reflecting the headers specified in the request’s **Access-Control-Request-Headers** header.
+- exposedHeaders: Configures the **Access-Control-Expose-Headers** CORS header. Expects a comma-delimited string (ex: ‘Content-Range,X-Content-Range’) or an array (ex: ['Content-Range', 'X-Content-Range']). If not specified, no custom headers are exposed.
+- credentials: Configures the **Access-Control-Allow-Credentials** CORS header. Set true to pass the header, otherwise it is omitted.
+- maxAge: Configures the **Access-Control-Max-Age** CORS header. Set to an integer to pass the header, otherwise it is omitted.
+- preflightContinue: Pass the CORS preflight response to the next handler.
+- optionsSuccessStatus: Provides a status code to use for successful OPTIONS requests, since
+
+**The default configuration is the equivalent of:**
+
+```js
+{
+
+"origin": "*",
+
+"methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+
+"preflightContinue": false,
+
+"optionsSuccessStatus": 204
+
+}
+```
+
+**For our web backend configuration is:**
+
+```
+{
+
+"origin": “https://www.bgunifiedsolutions.net/”,
+
+"methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+
+}
+```

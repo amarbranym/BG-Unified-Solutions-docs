@@ -1,0 +1,87 @@
+# **CHATBOT**
+
+Chatbots use natural language recognition capabilities to discern the intent of what a user is saying, in order to respond to inquiries and requests. The problem is, most chatbots try to mimic human interactions, which can frustrate users when a misunderstanding arises. Watson Assistant is more.
+
+**To create a chatbot similar to the website following things are required-**
+
+1. Intents & Entities
+2. Dialogs
+
+**To **access** this first of all you need to login and to do the same, these are the required steps-**
+
+1. Click Start demo now!
+    
+    The demo starts on the Watson Assistant page.
+    
+2. In the lower-left corner, click the Login link.
+3. Click Log in with IBM ID. For the purposes of this demo, an IBMid and a password are automatically entered for you.
+    
+    You're now in the simulated work space environment where all your workspaces are stored.
+    
+4. Near the *Workspaces* heading, click Create.
+    
+    In the *Create a workspace* window, the name DTE Watson Assistant is entered for you.
+    
+5. Click the Name field to continue.
+    
+    The description Guided walkthrough of Watson Assistant is entered for you.
+    
+6. Click the Description field.
+7. Click Create.
+    
+    You're now in your workspace and can begin building.
+    
+8. Click Content Catalog.
+    
+    In the Content Catalog, you can find pre-trained catalogs of intents that you can import by clicking Add to workspace.
+    
+9. Click the Intents tab.
+
+**Now to create an **intent** follow these steps-**
+
+1. Click Add Intent.
+    
+    Click Create intent.
+    
+    To train Watson Assistant to understand this intent, you must add at least five user examples. Be sure to capture the voice and style of how users actually type.
+    
+2. Click the Entities tab.
+    
+    You can import entities or create custom entities.
+    
+3. eCreate an entity:
+    
+    a. Click Add entity.
+    
+    Click the System entities tab.
+    
+    This tab shows pre-trained entities that you can turn on and off depending on what you want to build in your dialog flow. You can't edit the pre-trained entities, but you can click them to see examples of what each is trained on.
+    
+    Click the Dialog tab.
+    
+
+**Now using these intents we create **Dialogs** and to do the same follow these steps -**
+
+1. Click Create.
+    
+    Two dialog nodes are created for you:
+    
+    - A Welcome node, which automatically opens with a welcome message when you open the chatbot
+    - An "Anything else" node, which is triggered as a last resort if none of the other dialog nodes are recognized
+2. a. Click Welcome.
+    
+    This node includes responses that Watson Assistant uses when it doesn't understand the user input. Watson Assistant prompts the user to rephrase so that a trained intent can be triggered.
+    
+    d. Close the node by clicking the X in the upper-right corner.
+    
+    e. Click Welcome.
+    
+3. Click Add node.
+    
+    By using slots, you can loop through required fields and collect all the necessary information when you interact with a user. Most importantly, slots collect information at the users' pace. The details that the user provides upfront are saved. The service asks only for the details that the user doesn't provide. Slots are described in more detail when you test your bot.
+    
+    e. Click Apply.
+    
+4. In the "Then check for" section, click Enter entity or intent.
+
+5. In the upper-right corner, click Try it.

@@ -1,0 +1,83 @@
+## **Server Deployment Using Manual Process**
+
+## **Introduction**
+
+This document provides comprehensive instructions for deploying the BG Unified Solutions website servers using SSH commands. The deployment process involves logging into the server securely, navigating to the project repository, fetching the latest changes from GitHub, and restarting the Node.js application using pm2 for process management.
+
+## **Prerequisites**
+
+To proceed with the deployment, ensure the following prerequisites are met:
+
+1. Access to a server with SSH credentials.
+2. sshpass application installed on the local machine.
+    - For Ubuntu, install using: sudo apt install sshpass.
+3. Git installed on the server.
+4. Node.js and pm2 installed on the server.
+
+## **Infrastructure**
+
+For the deployment of the website, We maintained three kinds of web servers -
+
+1. 1x Redhat 7 Development server
+2. 2x Redhat 7 Production servers (Cloned Servers for load balancing)
+3. 3x Redhat 7 Database servers (MongoDB Replica Set)
+
+All of the servers were accessed through PuTTY (A SSH client for Windows) on a Windows Server which we had access to using Parallels Remote Desktop Client.
+
+To manage the routing for the website a NGINX server was used. [**Nginx**](https://www.nginx.com/) is a free and open-source HTTP server which doubles up as a reverse proxy server or as a mail proxy server. It is a high performance server with simple configuration options and low resource consumption.
+
+The NGINX server sits in front of the frontend and backend (Node.js with Express) servers and routes the requests accordingly. All requests starting with /api in the route are routed to the backend server after removing the /api part. To deploy the frontend, At first the static files were generated and hosted using the NGINX server but later we decided on using a Node.js server instead to support extra Next.js functionality like dynamic links .
+
+To keep the Node.js process running in background and automatically on boot, a process manager called [**PM2**](https://pm2.keymetrics.io/) was used. PM2 is a daemon process manager that helps manage and keep the application online 24/7.
+
+The website source code is available in /usr/share/nginx/ww3/ directory on the production web servers and the NGINX configuration is available at /etc/nginx/nginx.conf. The SSL certificate is located at /etc/ssl/.
+
+## **Step 1: Login to the Server**
+
+Open a terminal on your local machine and securely log in to the server using the following command:
+
+```{3} copy
+sshpass -p <password> ssh <username>@<server_ip>
+```
+
+Replace `<username>`, `<password>` with the server username and password, and `<server_ip>` with the actual IP address of the server.
+
+## **Step 2: Navigate to the Desired Repository**
+
+Once logged in, use the cd command to navigate to the directory where the repository is located:
+
+``` {3} copy
+cd /usr/share/nginx/bgus
+```
+
+## **Step 3: Pull Latest Changes from GitHub**
+
+Ensure Git is installed on the server. Execute the following commands to pull the latest changes from the GitHub repository:
+
+```command {3} copy
+git pull origin master
+```
+
+This assumes the default branch is master. Adjust the branch name as needed.
+
+## **Step 4: Restart the Server Using pm2**
+
+The Node.js application is managed by pm2. Restart the service with the following command:
+
+``` {3} copy 
+pm2 restart server.js
+```
+
+Here, server.js is the actual name of the pm2 process.
+
+Congratulations! The server has been successfully deployed with the latest changes from the GitHub repository, and the Node.js application has been restarted using pm2.
+
+## **Steps to Install sshpass (For Ubuntu)**
+
+Open a terminal on your local machine and install the application using:
+
+``` {3} copy
+sudo apt install sshpass
+```
+
+These instructions are designed for DevOps developers to efficiently deploy and manage the BG Unified Solutions website servers. Follow the steps meticulously to ensure a seamless deployment process.
